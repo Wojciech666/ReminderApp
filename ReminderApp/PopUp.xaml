@@ -1,0 +1,26 @@
+﻿<Window x:Class="ReminderApp.PopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReminderApp"
+        mc:Ignorable="d"
+        Title="Little Reminder" MinHeight="100"
+        MinWidth="300" MaxHeight="150" MaxWidth="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="45*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="TextblockMessage" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Button x:Name="ButtonEndReminding" Grid.Column="1" Grid.Row="2" MaxHeight="25" MaxWidth="100" Click="ButtonSet_Click">End Reminding</Button>
+    </Grid>
+</Window>
