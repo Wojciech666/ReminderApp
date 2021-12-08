@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReminderApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="250" Width="450"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"></ColumnDefinition>
-            <ColumnDefinition Width="45*"></ColumnDefinition>
-            <ColumnDefinition Width="45*"></ColumnDefinition>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
             <ColumnDefinition Width="5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -19,18 +20,16 @@
             <RowDefinition Height="15*"/>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
-        <Label Target="{Binding ElementName=TextboxTimePerdiod}" Grid.Column="1" Grid.Row="3">Period of reminding in minutes</Label>
-        <TextBox x:Name="TextboxTimePerdiod" MaxWidth="300" MaxHeight="40" Grid.Column="2" Grid.Row="3"/>
+        <Label Target="{Binding ElementName=TextboxTimePerdiod}" Margin="10,10,10,10" Grid.Column="1" Grid.Row="1">Period of reminding in minutes</Label>
+        <TextBox x:Name="TextboxTimePerdiod" MaxWidth="300" MaxHeight="40" Grid.Column="2" Grid.Row="1"/>
 
-        <Label Target="{Binding ElementName=TextboxInformation}" Grid.Column="1" Grid.Row="4">Information to display every x minutes</Label>
-        <TextBox x:Name="TextboxInformation" MaxWidth="300" MaxHeight="40" Grid.Column="2" Grid.Row="4"/>
+        <Label Target="{Binding ElementName=TextboxInformation}" Margin="10,10,10,10" Grid.Column="1" Grid.Row="2">Information to display every x minutes</Label>
+        <TextBox x:Name="TextboxInformation" MaxWidth="300" MaxHeight="40" Grid.Column="2" Grid.Row="2"/>
 
-        <Button x:Name="ButtonSet" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"
+        <Button x:Name="ButtonSet" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"
                 MaxHeight="30" MaxWidth="40" Click="ButtonSet_Click">Set</Button>
         
     </Grid>

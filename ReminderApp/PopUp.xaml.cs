@@ -19,15 +19,46 @@ namespace ReminderApp
     /// </summary>
     public partial class PopUp : Window
     {
+        bool endReminding;
         public PopUp(string message)
         {
             InitializeComponent();
+            if (this.WindowState == WindowState.Minimized) this.WindowState = WindowState.Normal;
+            this.Activate();
+            this.Topmost = true; 
+            this.Focus();
             TextblockMessage.Text = message;
+        }
+        public void ShowOverAll()
+        {
+            if (!this.IsVisible)
+            {
+                this.Show();
+            }
+
+            if (this.WindowState == WindowState.Minimized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+
         }
 
         private void ButtonSet_Click(object sender, RoutedEventArgs e)
         {
+            End = false;
+            this.Close();
+        }
 
+        public bool End 
+        {
+            get { return endReminding; }
+            private set { endReminding = value; }
+        }
+
+        private void ButtonRemindAgain_Click(object sender, RoutedEventArgs e)
+        {
+            End = true;
+            this.Close();
         }
     }
 }

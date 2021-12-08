@@ -22,7 +22,6 @@ namespace ReminderApp
     public partial class MainWindow : Window
     {
         private System.Windows.Threading.DispatcherTimer popupTimer;
-        DateTime Time;
         int period;
         string popUpInfo;
         struct TimeStruct
@@ -41,59 +40,55 @@ namespace ReminderApp
             {
                 MessageBox.Show("The input fields cannot be empty!", "Empty fileds", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else if(!System.Text.RegularExpressions.Regex.IsMatch(TextboxTimePerdiod.Text, "^[0-9]*$"))
+            {
+                MessageBox.Show("Type time period as decimal integer in minutes!", "Only numbers!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             else
             {
-                Time = DateTime.Now;
+                ButtonSet.IsEnabled = false;
                 period = Int32.Parse(TextboxTimePerdiod.Text);
                 popUpInfo = TextboxInformation.Text;
 
-                TimeStruct timeToSet;
-                popupTimer = new System.Windows.Threading.DispatcherTimer();
-                timeToSet = MinutesToHourConverter(period);
-                popupTimer.Interval = new TimeSpan(0, timeToSet.hours, timeToSet.minutes);
-                popupTimer.IsEnabled = true;
-                popupTimer.Tick += new EventHandler(popupTimer_Tick);
+                PopupTimeSetting();
             }
             
         }
 
-        private void OnClick(object sender, RoutedEventArgs e)
+        private void ClearTextboxes()
+        {
+            TextboxInformation.Clear();
+            TextboxTimePerdiod.Clear();
+            period = 0;
+            popUpInfo = "";
+        }
+
+        private void PopupTimeSetting()
         {
             TimeStruct timeToSet; 
             popupTimer = new System.Windows.Threading.DispatcherTimer();
             timeToSet = MinutesToHourConverter(period);
-            popupTimer.Interval = new TimeSpan(0,timeToSet.hours, timeToSet.minutes);
+            popupTimer.Interval = new TimeSpan(timeToSet.hours, timeToSet.minutes,0);
             popupTimer.IsEnabled = true;
-            popupTimer.Tick += new EventHandler(popupTimer_Tick);
+            popupTimer.Tick += new EventHandler(PopupTimerTick);
         }
 
-        void popupTimer_Tick(object sender, EventArgs e)
+        void PopupTimerTick(object sender, EventArgs e)
         {
             popupTimer.IsEnabled = false;
             PopUp popUp = new PopUp(popUpInfo);
-            popUp.Show();
-            if (!popUp.IsVisible)
-            {
-                popUp.Show();
-            }
+            popUp.ShowDialog();
+            bool status = popUp.End;                        
 
-            if (popUp.WindowState == WindowState.Minimized)
+            if (status)
             {
-                popUp.WindowState = WindowState.Normal;
+                PopupTimeSetting();
             }
-
-            popUp.Activate();
-            popUp.Topmost = true;  // important
-            popUp.Topmost = false; // important
-            popUp.Focus();         // important
-        }
-      
-        private bool TextboxValidator(string inputText)
-        {
-            if (new Regex(@"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$").IsMatch(inputText))
-                return true;
             else
-                return false;
+            {
+                ButtonSet.IsEnabled = true;
+                ClearTextboxes();
+            }
         }
 
         private TimeStruct MinutesToHourConverter(int period)

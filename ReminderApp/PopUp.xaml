@@ -11,6 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"></ColumnDefinition>
             <ColumnDefinition Width="45*"></ColumnDefinition>
+            <ColumnDefinition Width="45*"></ColumnDefinition>
             <ColumnDefinition Width="5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -20,7 +21,8 @@
             <RowDefinition Height="40*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="TextblockMessage" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <TextBlock x:Name="TextblockMessage" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         <Button x:Name="ButtonEndReminding" Grid.Column="1" Grid.Row="2" MaxHeight="25" MaxWidth="100" Click="ButtonSet_Click">End Reminding</Button>
+        <Button x:Name="ButtonRemindAgain" Grid.Column="2" Grid.Row="2" MaxHeight="25" MaxWidth="100" Click="ButtonRemindAgain_Click" >Remind again</Button>
     </Grid>
 </Window>
